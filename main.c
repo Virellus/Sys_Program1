@@ -11,7 +11,7 @@ Student NetID: wjs291
 
 int main(int argc, char *argv[]){
     if (argv != 5){
-        printf("Incorrect num arguments!")
+        printf("Incorrect number of arguments!")
         return 1;
     }
     char *inFile = argv[1];
@@ -28,8 +28,15 @@ int main(int argc, char *argv[]){
     }
 
     char inBuf[BUF_SIZE];
+    int inBufValue
 
-    //Process files
+    //Process 
+    while true {
+        sscanf(inBuf, "%d", &inBufValue);
+        char *outFizz = (inBufValue % fizzNum == 0) ? "Divisable by 3\n" : "Not divisable by 3\n";
+        char *outBuzz = (inBufValue % buzzNum == 0) ? "Divisable by 5\n" : "Not divisable by 5\n";
+        
+    }
 
     close(inFD);
     close(outFD);

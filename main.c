@@ -24,10 +24,20 @@ int main(int argc, char *argv[]){   // argc is the count of cli arguments, argv 
     int offset = 0;                 // used to recall where in file the program is 
     
     //intitalize the arguments
-    char *inFile = argv[1];
-    char *outFile = argv[2];
-    int fizzNum = atoi(argv[3]);
-    int buzzNum = atoi(argv[4]);
+    // the nmae of program will be first
+    char *inFile = argv[1];         // the random number file
+    char *outFile = argv[2];        //results file
+    int fizzNum;                    //first number 
+    int buzzNum;                    // secound number
+
+    if (sscanf(argv[3], "%d", &fizzNum) != 1){
+        printf("Error invalid fizz number argument\n");
+        return 1;
+    }
+    if (sscanf(argv[4], "%d", &buzzNum) != 1){
+        printf("Error invalid buzz number argument\n");
+        return 1;
+    }
     // attempts to open file
     int fd_inFile = open(inFile, O_RDONLY);
     if (fd_inFile == -1) {                      // making sure opens 
@@ -66,7 +76,13 @@ int main(int argc, char *argv[]){   // argc is the count of cli arguments, argv 
         strncpy(line, inBuf, lineLen);
         line[lineLen] = '\0';
         // convert strings to int
-        int number = atoi(line);
+        int number;
+        if (sscanf(line, "%d", &number) != 1){
+            printf("Error invalid number from input file\n");
+            close(fd_inFile);
+            close(fd_outFile);
+            return 1;
+        }
         // creating a output starting with the number
         int outLen = snprintf(outBuf, BUF_SIZE, "%d ", number);
         // fizz check
